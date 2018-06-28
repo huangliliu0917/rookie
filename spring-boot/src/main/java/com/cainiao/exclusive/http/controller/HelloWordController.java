@@ -1,4 +1,4 @@
-package com.cainiao.exclusive.controller;
+package com.cainiao.exclusive.http.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
