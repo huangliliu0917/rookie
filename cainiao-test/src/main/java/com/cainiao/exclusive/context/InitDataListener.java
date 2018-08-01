@@ -24,9 +24,9 @@ public class InitDataListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
     // 获取业务逻辑类productService查询商品信息
         ApplicationContext ac = new FileSystemXmlApplicationContext("classpath:/spring/application-context.xml");
-        DruidDataSource obj = (DruidDataSource)ac.getBean("dataSource");
+      /*  DruidDataSource obj = (DruidDataSource)ac.getBean("dataSource");
         String str = obj.getUrl();
-        System.out.println(str);
+        System.out.println(str);*/
     }
 
 }
