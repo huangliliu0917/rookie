@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  
+xmlns:jee="http://www.springframework.org/schema/jee"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"> 
+		<!-- 最大空闲连接数量  --> 
+        <property name="maxIdle" value="${redis_maxIdle}" />  
+        <!-- 最小空闲连接数量  --> 
+        <property name="minIdle" value="${redis_minIdle}" /> 
+        <!--最大连接数--> 
+        <property name="maxTotal" value="${redis_maxTotal}" /> 
+        <!--最大等待时间-->  
+        <property name="maxWaitMillis" value="${redis_maxWaitMillis}" />  
+        <!--指明是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个,生产环境关闭 --> 
+        <property name="testOnBorrow" value="${redis_testOnBorrow}" />
+        <!-- 指明是否在归还到池中前进行检验,生产环境关闭 -->
+      	<property name="testOnReturn" value="${redis_testOnReturn}" />
+      	<!-- 指明连接是否被空闲连接回收器进行检验.如果检测失败,则连接将被从池中去除 -->
+      	<property name="testWhileIdle" value="${redis_testWhileIdle}" />
+    </bean>  
+      
+    <bean id="sentinelConfiguration"  
+        class="org.springframework.data.redis.connection.RedisSentinelConfiguration">  
+        <property name="master">  
+            <bean class="org.springframework.data.redis.connection.RedisNode">  
+                <property name="name" value="${redis_sentinel_masterName}"></property>  
+            </bean>  
+        </property>  
+        <property name="sentinels">  
+            <set>  
+                <bean class="org.springframework.data.redis.connection.RedisNode">  
+                    <constructor-arg name="host"  
+                        value="${redis_sentinel1_host}"></constructor-arg>  
+                    <constructor-arg name="port"  
+                        value="${redis_sentinel1_.port}"></constructor-arg>  
+                </bean>  
+                <bean class="org.springframework.data.redis.connection.RedisNode">  
+                    <constructor-arg name="host"  
+                        value="${redis_sentinel2_host}"></constructor-arg>  
+                    <constructor-arg name="port"  
+                        value="${redis_sentinel2_port}"></constructor-arg>  
+                </bean>  
+            </set>  
+        </property>  
+    </bean>  
+      
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:timeout="${redis_timeout}">  
+        <!--不同的业务可以用db来区分下，在0-15之间的， 一个redis默认有16个，也就是0-15，默认是0，若是另外有新业务可以给redis.db赋值      
+        -->
+        <property name="database" value="15"/>
+        <constructor-arg name="sentinelConfig" ref="sentinelConfiguration"></constructor-arg>  
+        <constructor-arg name="poolConfig" ref="poolConfig"></constructor-arg> 
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory"   ref="connectionFactory" />  
+    </bean>
+</beans>

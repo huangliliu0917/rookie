@@ -1,0 +1,42 @@
+---------------------------------------------------------1.异常---------------------------------------------------------------------------------------
+异常描述：阿里云服务器搭建redis哨兵模式，使用外网地址访问报异常
+Caused by: org.redisson.client.RedisConnectionException: Can't init enough connections amount! Only 0 from 10 were initialized. Server: /172.31.40.25:6381
+	at org.redisson.connection.pool.ConnectionPool$2$1.operationComplete(ConnectionPool.java:130)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:507)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:481)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:420)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:122)
+	at org.redisson.misc.RedissonPromise.tryFailure(RedissonPromise.java:98)
+	at org.redisson.connection.pool.ConnectionPool.promiseFailure(ConnectionPool.java:298)
+	at org.redisson.connection.pool.ConnectionPool.access$400(ConnectionPool.java:53)
+	at org.redisson.connection.pool.ConnectionPool$4.operationComplete(ConnectionPool.java:268)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:507)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:481)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:420)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:122)
+	at org.redisson.misc.RedissonPromise.tryFailure(RedissonPromise.java:98)
+	at org.redisson.connection.ClientConnectionsEntry$1.operationComplete(ClientConnectionsEntry.java:141)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:507)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:481)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:420)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:122)
+	at org.redisson.misc.RedissonPromise.tryFailure(RedissonPromise.java:98)
+	at org.redisson.client.RedisClient$2$2.run(RedisClient.java:163)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:445)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: io.netty.channel.ConnectTimeoutException: connection timed out: /172.31.40.25:6381
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe$1.run(AbstractNioChannel.java:267)
+	at io.netty.util.concurrent.PromiseTask$RunnableAdapter.call(PromiseTask.java:38)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:120)
+	... 6 more
+
+
+解决方案：
+1.关闭防火墙
+2.redis.conf文件中 bind ip  需要注释起来
+3.sentinel.conf文件中 sentinel monitor mymaster 47.104.192.49 6380 2  配置成外网地址
+4.sentinel.conf文件中 sentinel known-slave/known-sentinel中的ip,配置成外网地址
