@@ -19,14 +19,11 @@
     </properties>
 
     <dependencies>
-
-
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>3.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>com.threedes</groupId>
             <artifactId>threedes</artifactId>

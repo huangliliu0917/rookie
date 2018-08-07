@@ -38,5 +38,6 @@ Caused by: io.netty.channel.ConnectTimeoutException: connection timed out: /172.
 解决方案：
 1.关闭防火墙
 2.redis.conf文件中 bind ip  需要注释起来
-3.sentinel.conf文件中 sentinel monitor mymaster 47.104.192.49 6380 2  配置成外网地址
+3.sentinel.conf文件中 sentinel monitor mymaster
+ 6380 2  配置成外网地址
 4.sentinel.conf文件中 sentinel known-slave/known-sentinel中的ip,配置成外网地址

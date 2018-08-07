@@ -46,8 +46,6 @@ public class RedisLockServiceImpl implements IRedisLockService {
 		config.useSentinelServers()
 		    .setMasterName(redis_lock_masterName)		    
 		    .addSentinelAddress(redis_lock_url1, redis_lock_url2)
-                .setMasterConnectionMinimumIdleSize(1)
-                .setMasterConnectionPoolSize(3)
 		    .setDatabase(15)
 		    .setTimeout(redis_lock_timeout);
 		redissonClient = Redisson.create(config);
