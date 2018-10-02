@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-lazy-init="false">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="spring-zk"  />
+    <dubbo:registry protocol="zookeeper" address="47.104.192.49:2181"/>
+
+    <!--客户信息查询（查询用户信息）-->
+    <dubbo:reference id="livelihoodProdService2Client" interface="com.bestpay.livelihood.product.api.ILivelihoodProdService2Client"
+                     retries="0" timeout="10000" check="false"/>
+</beans>
