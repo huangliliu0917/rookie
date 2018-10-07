@@ -2,7 +2,9 @@ package cn.mnquan.manager.impl;
 
 import cn.mnquan.manager.ITaoBaoManager;
 import cn.mnquan.mapper.TbMnCatItemMapper;
+import cn.mnquan.mapper.TbMnCatMapper;
 import cn.mnquan.mapper.TbMnMaterialOptionalMapper;
+import cn.mnquan.mapper.TbMnProductDetailMapper;
 import cn.mnquan.model.*;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -25,15 +27,28 @@ public class TaoBaoManagerImpl implements ITaoBaoManager{
     private TbMnMaterialOptionalMapper tbMnMaterialOptionalMapper;
     @Autowired
     private TbMnCatItemMapper tbMnCatItemMapper;
+    @Autowired
+    private TbMnCatMapper tbMnCatMapper;
+    @Autowired
+    private TbMnProductDetailMapper tbMnProductDetailMapper;
 
     /**
      * 获取首页元素列表
-     * @param page
+     * @param optionalDo
      * @return
      */
-    public List<TbMnMaterialOptionalDo> getProductList(Page page) {
-        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+    public List<TbMnMaterialOptionalDo> getProductList(TbMnMaterialOptionalDo optionalDo) {
+        PageHelper.startPage(optionalDo.getPageNo(),optionalDo.getPageSize());
         TbMnMaterialOptionalDoExample example = new TbMnMaterialOptionalDoExample();
+        if(null != optionalDo.getNumIid()){
+            example.createCriteria().andNumIidEqualTo(optionalDo.getNumIid());
+        }
+        if(null != optionalDo.getLevelOneCategoryId()){
+            example.createCriteria().andLevelOneCategoryIdEqualTo(optionalDo.getLevelOneCategoryId());
+        }
+        if(null != optionalDo.getCategoryId()){
+            example.createCriteria().andCategoryIdEqualTo(optionalDo.getCategoryId());
+        }
         example.setOrderByClause("volume desc");
         List<TbMnMaterialOptionalDo> optionalDos = tbMnMaterialOptionalMapper.selectByExample(example);
         return optionalDos;
@@ -60,5 +75,44 @@ public class TaoBaoManagerImpl implements ITaoBaoManager{
         example.setOrderByClause("sort");
         List<TbMnCatItemDo> catItemDos = tbMnCatItemMapper.selectByExample(example);
         return catItemDos;
+    }
+
+    /**
+     * 获取二级类目名称
+     * @param optionalDo
+     * @return
+     */
+    public TbMnCatItemDo getCategoryName(TbMnMaterialOptionalDo optionalDo) {
+        TbMnCatItemDoExample example = new TbMnCatItemDoExample();
+        example.createCriteria().andCategoryIdEqualTo(String.valueOf(optionalDo.getCategoryId()))
+        .andCatIdEqualTo(String.valueOf(optionalDo.getLevelOneCategoryId()));
+        List<TbMnCatItemDo> catItemDos = tbMnCatItemMapper.selectByExample(example);
+        return catItemDos.get(0);
+    }
+
+    /**
+     * 获取一级类目名称
+     * @param catId
+     * @return
+     */
+    public TbMnCatDo getCatName(String catId) {
+        TbMnCatDoExample example = new TbMnCatDoExample();
+        example.createCriteria().andCatIdEqualTo(catId);
+
+        List<TbMnCatDo> catDos = tbMnCatMapper.selectByExample(example);
+        return catDos.get(0);
+    }
+
+    /**
+     * 获取商品详情
+     * @param numIid
+     * @return
+     */
+    public TbMnProductDetailDo getProductDetail(Long numIid) {
+        TbMnProductDetailDoExample example = new TbMnProductDetailDoExample();
+        example.createCriteria().andNumIidEqualTo(numIid);
+
+        List<TbMnProductDetailDo> list =tbMnProductDetailMapper.selectByExample(example);
+        return list.get(0);
     }
 }

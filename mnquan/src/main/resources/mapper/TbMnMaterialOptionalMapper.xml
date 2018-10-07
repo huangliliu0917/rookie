@@ -42,6 +42,7 @@
     <result column="jdd_price" jdbcType="VARCHAR" property="jddPrice" />
     <result column="token_time" jdbcType="VARCHAR" property="tokenTime" />
     <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="coupon_amount" jdbcType="VARCHAR" property="couponAmount" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -108,7 +109,7 @@
     coupon_total_count, coupon_remain_count, coupon_info, commission_type, shop_title, 
     shop_dsr, coupon_share_url, url, level_one_category_name, level_one_category_id, 
     category_name, category_id, short_title, white_image, oetime, ostime, jdd_num, jdd_price, 
-    token_time, token
+    token_time, token,coupon_amount
   </sql>
   <select id="selectByExample" parameterType="cn.mnquan.model.TbMnMaterialOptionalDoExample" resultMap="BaseResultMap">
     select
@@ -283,6 +284,9 @@
       <if test="token != null">
         token,
       </if>
+      <if test="couponAmount != null">
+        coupon_amount,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -404,6 +408,9 @@
       </if>
       <if test="token != null">
         #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null">
+        #{couponAmount,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

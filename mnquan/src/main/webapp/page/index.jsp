@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -78,27 +79,36 @@
             </div>
             <div class="swiper-container swiper-container3">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><a href="/index.php?r=index/cat&amp;cid=1">女装</a></div>
-                    <div class="swiper-slide"><a href="/index.php?r=index/cat&amp;cid=6">美食</a></div>
-                    <div class="swiper-slide"><a href="/index.php?r=index/cat&amp;cid=3">美妆</a></div>
-                    <div class="swiper-slide"><a href="/index.php?r=index/cat&amp;cid=4">居家日用</a></div>
-                    <div class="swiper-slide"><a href="/index.php?r=index/cat&amp;cid=9">男装</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=1" data-cid="1">女装</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=2" data-cid="6">男装</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=3" data-cid="3">鞋品</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=4" data-cid="4">内衣</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=5" data-cid="9">配饰</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=6" data-cid="5">美妆</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=7" data-cid="8">母婴</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=8" data-cid="2">美食</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=9" data-cid="11">箱包</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=10" data-cid="10">居家日用</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=11" data-cid="7">数码家电</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=12" data-cid="12">文娱车品</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=13" data-cid="14">家装家纺</a></div>
+                    <div class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=14" data-cid="13">户外运动</a></div>
                 </div>
             </div>
             <a href="javascript:;" onclick="getClassify();" class="whole iconfont icon-xia"></a>
             <div class="ullit_tab" style="width:344px;">选择分类</div>
             <div class="ullit" style="width:344px;left:-50px;">
                 <ul class="row-s col-mar">
-                    <li class="col-12-3 text-center">
+                   <%-- <li class="col-12-3 text-center">
                         <a href="/index.php?r=index/wap">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB2LX03HKuSBuNjy1XcXXcYjFXa-2053469401.png">
                             </i>
                             <span>精选</span>
                         </a>
-                    </li>
+                    </li>--%>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=1">
+                        <a href="/app/classify/skipProduct.do?catId=1">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2oX82HL9TBuNjy0FcXXbeiFXa-2053469401.png">
                             </i>
@@ -106,63 +116,63 @@
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=6">
+                        <a href="/app/classify/skipProduct.do?catId=2">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i4/2053469401/TB2PFV2HL9TBuNjy0FcXXbeiFXa-2053469401.png">
-                            </i>
-                            <span>美食</span>
-                        </a>
-                    </li>
-                    <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=3">
-                            <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2QybZHL1TBuNjy0FjXXajyXXa-2053469401.png">
-                            </i>
-                            <span>美妆</span>
-                        </a>
-                    </li>
-                    <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=4">
-                            <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB2FCJnHFGWBuNjy0FbXXb4sXXa-2053469401.png">
-                            </i>
-                            <span>居家日用</span>
-                        </a>
-                    </li>
-                    <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=9">
-                            <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2n7WyHN9YBuNjy0FfXXXIsVXa-2053469401.png">
                             </i>
                             <span>男装</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=5">
+                        <a href="/app/classify/skipProduct.do?catId=3">
                             <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2g79yHN9YBuNjy0FfXXXIsVXa-2053469401.png">
+                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2QybZHL1TBuNjy0FjXXajyXXa-2053469401.png">
                             </i>
                             <span>鞋品</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=8">
+                        <a href="/app/classify/skipProduct.do?catId=4">
                             <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB230SXHL9TBuNjy1zbXXXpepXa-2053469401.png">
+                                <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB2FCJnHFGWBuNjy0FbXXb4sXXa-2053469401.png">
                             </i>
-                            <span>数码家电</span>
+                            <span>内衣</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=2">
+                        <a href="/app/classify/skipProduct.do?catId=5">
                             <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i4/2053469401/TB2QMv0ay6guuRjy1XdXXaAwpXa-2053469401.png">
+                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2n7WyHN9YBuNjy0FfXXXIsVXa-2053469401.png">
+                            </i>
+                            <span>配饰</span>
+                        </a>
+                    </li>
+                    <li class="col-12-3 text-center">
+                        <a href="/app/classify/skipProduct.do?catId=6">
+                            <i class="iconfont ">
+                                <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2g79yHN9YBuNjy0FfXXXIsVXa-2053469401.png">
+                            </i>
+                            <span>美妆</span>
+                        </a>
+                    </li>
+                    <li class="col-12-3 text-center">
+                        <a href="/app/classify/skipProduct.do?catId=7">
+                            <i class="iconfont ">
+                                <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB230SXHL9TBuNjy1zbXXXpepXa-2053469401.png">
                             </i>
                             <span>母婴</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=11">
+                        <a href="/app/classify/skipProduct.do?catId=8">
+                            <i class="iconfont ">
+                                <img src="https://img.alicdn.com/imgextra/i4/2053469401/TB2QMv0ay6guuRjy1XdXXaAwpXa-2053469401.png">
+                            </i>
+                            <span>美食</span>
+                        </a>
+                    </li>
+                    <li class="col-12-3 text-center">
+                        <a href="/app/classify/skipProduct.do?catId=9">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i2/2053469401/TB27Cw.HwaTBuNjSszfXXXgfpXa-2053469401.png">
                             </i>
@@ -170,31 +180,31 @@
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=10">
+                        <a href="/app/classify/skipProduct.do?catId=10">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i3/2053469401/TB2cnZWzfiSBuNkSnhJXXbDcpXa-2053469401.png">
                             </i>
-                            <span>内衣</span>
+                            <span>居家日用</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=7">
+                        <a href="/app/classify/skipProduct.do?catId=11">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i4/2053469401/TB21.plHQKWBuNjy1zjXXcOypXa-2053469401.png">
+                            </i>
+                            <span>数码家电</span>
+                        </a>
+                    </li>
+                    <li class="col-12-3 text-center">
+                        <a href="/app/classify/skipProduct.do?catId=12">
+                            <i class="iconfont ">
+                                <img src="https://img.alicdn.com/imgextra/i2/2053469401/TB2i36ZazfguuRjy1zeXXb0KFXa-2053469401.png">
                             </i>
                             <span>文娱车品</span>
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=12">
-                            <i class="iconfont ">
-                                <img src="https://img.alicdn.com/imgextra/i2/2053469401/TB2i36ZazfguuRjy1zeXXb0KFXa-2053469401.png">
-                            </i>
-                            <span>配饰</span>
-                        </a>
-                    </li>
-                    <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=14">
+                        <a href="/app/classify/skipProduct.do?catId=13">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i1/2053469401/TB2uI3VzcyYBuNkSnfoXXcWgVXa-2053469401.png">
                             </i>
@@ -202,7 +212,7 @@
                         </a>
                     </li>
                     <li class="col-12-3 text-center">
-                        <a href="/index.php?r=index/cat&amp;cid=13">
+                        <a href="/app/classify/skipProduct.do?catId=14">
                             <i class="iconfont ">
                                 <img src="https://img.alicdn.com/imgextra/i4/2053469401/TB2rrnsHH9YBuNjy0FgXXcxcXXa-2053469401.png">
                             </i>
@@ -214,28 +224,28 @@
         </div>
     </div>
     <div class="ui_icon_tab_bg"></div>
-        <div class="ui_swiper">
-            <div class="swiper-container hidden-xs swiper-container1">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="width: 344px;">
-                        <a data-gid="16437958" data-ci="659473" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16437958" data-mold="3" data-el="1" data-addr="/index.php?r=p/d&amp;id=16437958">
-                            <img src="https://img.alicdn.com/imgextra/i4/2508158775/O1CN012Egzw9z7CiQ2AGI_!!2508158775.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-slide" style="width: 344px;">
-                        <a data-gid="16431390" data-ci="658186" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16431390" data-mold="3" data-el="2" data-addr="/index.php?r=p/d&amp;id=16431390">
-                            <img src="https://img.alicdn.com/imgextra/i2/2508158775/O1CN012Egzw8SNTimF6Zd_!!2508158775.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-slide swiper-slide-prev" style="width: 344px;">
-                        <a data-gid="16476316" data-ci="665368" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16476316" data-mold="3" data-el="3" data-addr="/index.php?r=p/d&amp;id=16476316">
-                            <img src="https://img.alicdn.com/imgextra/i1/2508158775/O1CN012EgzwD5gZywwFyg_!!2508158775.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-pagination swiper-p1"></div>
+    <div class="ui_swiper">
+        <div class="swiper-container swiper-container-horizontal swiper-container1">
+            <div class="swiper-wrapper" ui-mta-modular="" data-mta_name="首页-Banner" isload="true" style="transform: translate3d(-963px, 0px, 0px); transition-duration: 0ms;">
+                <div class="swiper-slide" style="width: 321px;">
+                    <a data-gid="16581846" data-ci="682858" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16581846" data-mold="3" data-el="1" data-addr="/index.php?r=p/d&amp;id=16581846">
+                        <img src="https://img.alicdn.com/imgextra/i2/1015405008/O1CN011mrhxbO9Ksmw0xU_!!1015405008.jpg" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide" style="width: 321px;">
+                    <a data-gid="16557302" data-ci="678103" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16557302" data-mold="3" data-el="2" data-addr="/index.php?r=p/d&amp;id=16557302">
+                        <img src="https://img.alicdn.com/imgextra/i3/1015405008/O1CN011mrhxci1ag9BLOa_!!1015405008.jpg" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide" style="width: 321px;">
+                    <a data-gid="16583437" data-ci="682456" data-in="1" data-uid="489217" data-cn="25" data-position="" ui-utm="" href="/index.php?r=p/d&amp;id=16583437" data-mold="3" data-el="3" data-addr="/index.php?r=p/d&amp;id=16583437">
+                        <img src="https://img.alicdn.com/imgextra/i2/1015405008/O1CN011mrhxalDEkSAMWH_!!1015405008.jpg" alt="">
+                    </a>
                 </div>
             </div>
+            <div class="swiper-pagination swiper-p1"></div>
         </div>
+    </div>
         <div class="hr"></div>
         <div class="home_nav" style="layout:2;margin-bottom:5px;">
             <ul class="row-s" ui-mta-modular="" data-mta_name="首页-图标导航" isload="true">
@@ -269,26 +279,13 @@
                     <div class="col-12-4 text-left">
                         <i></i>大家都在领
                     </div>
-                    <div class="col-12-8 text-right" style="display:none">
-                        <span ui-home-number="" data-time="2" isload="true">--.--.--.--</span> 次实时领券
+                    <div class="col-12-8 text-right" style="">
+                        10000+用户每天在领！
                     </div>
                 </div>
             </h3>
             <div class="swiper-container swiper-container-android swiper-container2">
                 <div id="indexCentreDIV" class="swiper-wrapper">
-                    <%--<div class="swiper-slide">
-                        <div class="swiper-cent">
-                            <div class="cent">
-                                <a href="?r=p/dnew&amp;id=16484290" class="img" data-mold="3" data-el="1" data-addr="/index.php?r=l/d&amp;id=16484290">
-                                    <img src="https://img.alicdn.com/bao/uploaded/TB2QchRwmYTBKNjSZKbXXXJ8pXa_!!2130096995.png_310x310.jpg" alt="">
-                                    <p class="text">3.3万<span>人已领</span> <i>|</i> 40元券</p>
-                                </a>
-                                <p class="name">微商爆款【仁和】中华神皂二盒</p>
-                                <p class="money"><i>¥</i>9.8 <del>¥49.8</del></p>
-                                <p class="progress" data-progress="33"><i style="width: 33%;"></i></p>
-                            </div>
-                        </div>
-                    </div>--%>
                 </div>
             </div>
         <div class="hr"></div>
@@ -298,7 +295,7 @@
                 <i></i>领券直播
             </div>
             <div class="col-12-8 text-right" style="">
-                今日已为用户省钱 <span ui-home-number="" data-num="56904170" data-time="2" isload="true">56,904,170</span> 元
+                今日已为用户省钱 <span ui-home-number="" data-num="56904170" data-time="2" isload="true">904,170</span> 元
             </div>
         </div>
     </h3>
@@ -332,31 +329,29 @@
 </body>
 <script>
     var pageNo = 1;
+    var domain = "http://"+window.location.host;
     new Swiper('.swiper-container1', {
         pagination: '.swiper-p1',
-        spaceBetween: 30,
-        centeredSlides: true,
+        loop: true, // 循环模式选项
         autoplay: {
             delay: 2500,
             disableOnInteraction: false,
         },
         pagination: {
             el: '.swiper-pagination',
-            clickable: true,
         },
     });
 
     new Swiper('.swiper-container2',{
-        pagination: '.swiper-p2',
-        slidesPerView: 3,
-        spaceBetween: 0,
-        freeMode: true,
-        autoplay : 5000,
-        speed:1000,
-        loop: true,
+        slidesPerView : 'auto',//同一个页面可以显示几个
+        loopedSlides :8,
         initialSlide :0,
         observer:true,//修改swiper自己或子元素时，自动初始化swiper
-        observeParents:true//修改swiper的父元素时，自动初始化swiper
+        observeParents:true,//修改swiper的父元素时，自动初始化swiper
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
     });
 
     function getProjects(){
@@ -373,11 +368,11 @@
                     $.each(data,function(index,item){
                         bannerHtml+='<div class="swiper-slide">' +
                             '<div class="swiper-cent"><div class="cent">' +
-                            '<a href='+item.pictUrl+' class="img" data-mold="3" data-el="1">' +
+                            '<a href="'+domain+'/app/detail/skipProductDetail.do?numIid='+item.numIid+'" class="img" data-mold="3" data-el="1">' +
                             '<img src='+item.pictUrl+' alt="">' +
-                            '<p class="text">'+item.volume+'<span>人已领</span> <i>|</i> 40元券</p></a>' +
-                            '<p class="name">微商爆款【仁和】中华神皂二盒</p>' +
-                            '<p class="money"><i>¥</i>9.8 <del>¥49.8</del></p>' +
+                            '<p class="text">'+item.volume+'<span>人已领</span> <i>|</i> '+item.couponAmount+'元券</p></a>' +
+                            '<p class="name">【爆款】'+item.shortTitle+'</p>' +
+                            '<p class="money"><i>¥</i>'+accSub(item.zkFinalPrice,item.couponAmount)+'<del>¥'+item.zkFinalPrice+'</del></p>' +
                             '<p class="progress" data-progress="33"><i style="width: 33%;"></i></p>' +
                             '</div></div></div></a></div>';
                     });
@@ -388,12 +383,9 @@
     }
 
     //每隔5秒查一次新数据
-    setInterval ("getProjects()", 10000);
+    setInterval ("getProjects()", 60000);
 
     new Swiper('.swiper-container3', {
-        direction: 'horizontal', // 垂直切换选项
-        loop: true, // 循环模式选项
-        centeredSlides: true,              //居中展示
         slidesPerView:'auto',
         spaceBetween:0,
     });
@@ -435,17 +427,17 @@
                         $.each(data,function(index,item){
                             var createLi = document.createElement("li");
                             createLi.className = "row-s listpage1";
-                            createLi.innerHTML+="<a href=''>" +
+                            createLi.innerHTML+="<a href="+domain+'/app/detail/skipProductDetail.do?numIid='+item.numIid+">" +
                                 "<p class='img'>" +
                                     "<img src="+item.pictUrl+" style='background: rgb(245, 245, 245); display: block;'>" +
                                 "</p>" +
                                 "<div class='cent'>" +
                                     "<h3>新券~"+item.shortTitle+"</h3>" +
-                                    "<div class='num col-aaa ><span> 天猫价 ¥"+item.zkFinalPrice+"</span>"+
-                                        "<span class='fr'>已售34.2万件</span>" +
+                                    "<div class='num col-aaa '><span> 淘宝价 ¥"+item.zkFinalPrice+"</span>"+
+                                        "<span class='fr'>已售"+item.volume+"件</span>" +
                                    "</div>" +
                                     "<div class='money col-money'>" +
-                                        "<p class='quan fr'><i>40元券</i></p>券后价 <span><i>¥</i>6</span>" +
+                                        "<p class='quan fr'><i>"+item.couponAmount+"元券</i></p>券后价 <span><i>¥</i>"+accSub(item.zkFinalPrice,item.couponAmount)+"</span>" +
                                     "</div>" +
                             "</div></a>"
                             document.getElementById("indexUl").appendChild(createLi);
@@ -472,6 +464,16 @@
             })
         })
     })
+
+    //减法避免丢失精度
+    function accSub(arg1, arg2) {
+        var r1, r2, m, n;
+        try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
+        try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
+        m = Math.pow(10, Math.max(r1, r2));
+        n = (r1 >= r2) ? r1 : r2;
+        return ((arg1 * m - arg2 * m) / m).toFixed(n);
+    }
 </script>
 </html>
 

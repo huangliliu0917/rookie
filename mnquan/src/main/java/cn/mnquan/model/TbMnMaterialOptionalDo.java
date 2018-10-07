@@ -1,6 +1,9 @@
 package cn.mnquan.model;
 
-public class TbMnMaterialOptionalDo {
+import lombok.ToString;
+
+@ToString
+public class TbMnMaterialOptionalDo extends Page{
     private Long id;
 
     private String couponStartTime;
@@ -45,6 +48,8 @@ public class TbMnMaterialOptionalDo {
 
     private Long couponRemainCount;
 
+    private String couponAmount;
+
     private String couponInfo;
 
     private String commissionType;
@@ -80,6 +85,14 @@ public class TbMnMaterialOptionalDo {
     private String tokenTime;
 
     private String token;
+
+    public String getCouponAmount() {
+        return couponAmount;
+    }
+
+    public void setCouponAmount(String couponAmount) {
+        this.couponAmount = couponAmount;
+    }
 
     public Long getId() {
         return id;

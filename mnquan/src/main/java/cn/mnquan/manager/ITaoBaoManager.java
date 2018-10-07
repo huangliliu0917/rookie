@@ -1,8 +1,6 @@
 package cn.mnquan.manager;
 
-import cn.mnquan.model.Page;
-import cn.mnquan.model.TbMnCatItemDo;
-import cn.mnquan.model.TbMnMaterialOptionalDo;
+import cn.mnquan.model.*;
 
 import java.util.List;
 
@@ -13,9 +11,15 @@ import java.util.List;
  * User: wangkecheng Date: 2018/9/30
  */
 public interface ITaoBaoManager {
-    List<TbMnMaterialOptionalDo> getProductList(Page page);
+    List<TbMnMaterialOptionalDo> getProductList(TbMnMaterialOptionalDo optionalDo);
 
     List<TbMnMaterialOptionalDo> getCentreList(Page page);
 
     List<TbMnCatItemDo> getCatList(TbMnCatItemDo catItemDo);
+
+    TbMnCatItemDo getCategoryName(TbMnMaterialOptionalDo optionalDo);
+
+    TbMnCatDo getCatName(String catId);
+
+    TbMnProductDetailDo getProductDetail(Long numIid);
 }

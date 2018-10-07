@@ -17,17 +17,14 @@
     <meta name="keywords" content="9.9包邮，白菜价，天天特价，优惠卷,淘券宝">
     <meta name="description" content="9.9包邮，白菜价，天天特价">
     <script src="../page/js/jquery.js" type="text/javascript"></script>
-    <link href="http://cmsstatic.dataoke.com/other/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
-    <link href="http://cmsstatic.dataoke.com//web/css/wap_common.css?v=201809201019" rel="stylesheet">
-    <link href="http://cmsstatic.dataoke.com//web/css/swiper-3.4.2.min.css?v=201809201019" rel="stylesheet">
-    <!-- 视频 E -->
-    <link href="http://cmsstatic.dataoke.com//web/css/wap_search.css?v=201809201019" rel="stylesheet">
-
-    <script src="http://cmsstatic.dataoke.com/other/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <link href="../page/js/swiper-4.4.1.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../page/js/wap_common.css">
+    <script src="../page/js/swiper-4.4.1.min.js"></script>
 </head>
 <body data-appid="489217" data-in="1" style="">
 <div class="main-title clearfix theme-bg-color-1" style="height: 44px">
-    <a href="/index.php?r=index/wap" class="main-back" style="margin-left: 0"></a>
+    <a href="javascript:void(0);" onclick="window.location.href=document.referrer;" class="main-back" style="margin-left: 0">
+    </a>
     <div class="mysrc" style="margin-left: 30px;" onclick="$('.search-pop').show()">
         <form action="/index.php?r=l&amp;kw=%E7%A7%8B%E8%A3%85" method="get">
             <button class="search_submit background" style="left: 0;"></button>
@@ -74,8 +71,8 @@
         <div class="menu-content myco1  " style="padding:0;">
             <div class="menu-nav" id="menu-nav" style="padding:0; -webkit-overflow-scrolling: touch; -webkit-box-flex: 1; position: fixed;">
                 <div class="ov_h" style="height:44px;"></div>
-                <a  class="active" id="1" onclick="get_cat_list('1');" name="45" data-id="1">女装</a>
-                <a  class="" id="2" onclick="get_cat_list('2')" name="90" data-id="1">男装</a>
+                <a  class="active" id="1" onclick="get_cat_list(1);" name="45" data-id="1">女装</a>
+                <a  class="" id="2" onclick="get_cat_list(2);" name="90" data-id="1">男装</a>
                 <a  class="" id="3" onclick="get_cat_list(3);" name="135" data-id="1">鞋品</a>
                 <a  class="" id="4" onclick="get_cat_list(4);" name="180" data-id="1">内衣</a>
                 <a  class="" id="5" onclick="get_cat_list(5);" name="225" data-id="1">配饰</a>

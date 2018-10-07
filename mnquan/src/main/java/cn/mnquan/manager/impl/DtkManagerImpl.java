@@ -2,7 +2,9 @@ package cn.mnquan.manager.impl;
 
 import cn.mnquan.commons.Contents;
 import cn.mnquan.manager.IDtkManager;
+import cn.mnquan.mapper.TbMnCatItemMapper;
 import cn.mnquan.mapper.TbMnMaterialOptionalMapper;
+import cn.mnquan.mapper.TbMnProductDetailMapper;
 import cn.mnquan.mapper.TbMnProductMapper;
 import cn.mnquan.model.*;
 import cn.mnquan.utils.BeanMapperUtil;
@@ -11,9 +13,13 @@ import cn.mnquan.utils.HttpClientUtils;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.TbkCouponGetRequest;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
+import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.request.TbkTpwdCreateRequest;
+import com.taobao.api.response.TbkCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
+import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -22,6 +28,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -36,25 +43,34 @@ import java.util.List;
 public class DtkManagerImpl implements IDtkManager {
 
     @Autowired
-    private TbMnProductMapper tbMnProductMapper;
+    private TbMnCatItemMapper tbMnCatItemMapper;
     @Autowired
     private TbMnMaterialOptionalMapper tbMnMaterialOptionalMapper;
+    @Autowired
+    private TbMnProductDetailMapper tbMnProductDetailMapper;
 
     /**
      * 业务入口
      */
     public void execute() throws ApiException {
         log.info("获取所有商品类目名称");
-        TbMnProductDoExample example = new TbMnProductDoExample();
+        TbMnCatItemDoExample example = new TbMnCatItemDoExample();
         example.createCriteria().andStateEqualTo("1");
 
-        List<TbMnProductDo> productDos = tbMnProductMapper.selectByExample(example);
+        List<TbMnCatItemDo> productDos = tbMnCatItemMapper.selectByExample(example);
         //获取前15页的数据
         for(int i = 0 ; i < 1 ; i++){
-            for(TbMnProductDo productDo : productDos){
-                String url = Contents.DAK_URL+"?keywords="+productDo.getCategoryName()+"&xuan=keyword&page="+i+"&px=sell";
-                HttpClientResponse rsp = HttpClientUtils.get(url);
-                Document doc = Jsoup.parse(rsp.getResponseContent());
+            for(TbMnCatItemDo productDo : productDos){
+                //http://www.dataoke.com/qlist/?keywords=%E8%A1%AC%E8%A1%AB&cid=1&px=sell&page=2
+                String cid = getCid(productDo);
+                String url = Contents.DAK_URL+"?keywords="+productDo.getCategoryName()+"&cid="+cid+"&xuan=keyword&page="+i+"&px=sell";
+                Document doc = null;
+                try {
+                    HttpClientResponse rsp = HttpClientUtils.get(url);
+                    doc = Jsoup.parse(rsp.getResponseContent());
+                } catch (Exception e) {
+                    continue;
+                }
                 Elements rows = doc.getElementsByClass("goods-item");
                 for(int j = 0 ; j<rows.size() ; j++){
                     //获取商品id
@@ -72,22 +88,110 @@ public class DtkManagerImpl implements IDtkManager {
                     TbkDgMaterialOptionalRequest req = new TbkDgMaterialOptionalRequest();
                     req.setQ(itemUrl);
                     req.setAdzoneId(Contents.adzone_id);
-                    TbkDgMaterialOptionalResponse optionalResponse = client.execute(req);
-                    TbkDgMaterialOptionalResponse.MapData mapData = optionalResponse.getResultList().get(0);
+                    TbkDgMaterialOptionalResponse.MapData mapData = null;
+                    try {
+                        TbkDgMaterialOptionalResponse optionalResponse = client.execute(req);
+                        mapData = optionalResponse.getResultList().get(0);
+                    } catch (Exception e) {
+                        continue;
+                    }
                     //如果券有效期为空，则continue
                     if(null == mapData.getCouponStartTime()) continue;
                     //获取淘口令
                     String command = getCommand(mapData);
+                    if(null == command || "" == command) continue;
+                    //获取优惠券金额
+                    String couponAmonunt = getCouponAmount(mapData);
+                    String smallImages = getSmallImages(mapData.getSmallImages());
 
                     TbMnMaterialOptionalDo record = BeanMapperUtil.objConvert(mapData,TbMnMaterialOptionalDo.class);
-                    record.setLevelOneCategoryId(Long.valueOf(productDo.getProductId()));
+                    System.out.println(record.toString());
+                    record.setLevelOneCategoryId(Long.valueOf(productDo.getCatId()));
                     record.setCategoryId(Long.valueOf(productDo.getCategoryId()));
                     record.setTokenTime(DateUtil.dateFormat(new Date()));
                     record.setToken(command);
+                    record.setSmallImages(smallImages);
+                    record.setCouponAmount(couponAmonunt);
                     tbMnMaterialOptionalMapper.insertSelective(record);
+
+                    //获取商品详情
+                    TbkItemInfoGetRequest request = new TbkItemInfoGetRequest();
+                    request.setNumIids(String.valueOf(mapData.getNumIid()));
+                    TbkItemInfoGetResponse response = client.execute(request);
+                    List<TbkItemInfoGetResponse.NTbkItem>  items = response.getResults();
+                    TbkItemInfoGetResponse.NTbkItem item = items.get(0);
+                    TbMnProductDetailDo productDetailDo = BeanMapperUtil.objConvert(item,TbMnProductDetailDo.class);
+                    tbMnProductDetailMapper.insertSelective(productDetailDo);
                 }
             }
         }
+    }
+
+    private String getCid(TbMnCatItemDo productDo) {
+        String cid = productDo.getCatId();
+        if("1".equals(cid)){//女装
+            return "1";
+        }
+        if("2".equals(cid)){//男装
+            return "9";
+        }
+        if("3".equals(cid)){//鞋品
+            return "5";
+        }
+        if("4".equals(cid)){//内衣
+            return "10";
+        }
+        if("5".equals(cid)){//配饰
+            return "12";
+        }
+        if("6".equals(cid)){//美妆
+            return "3";
+        }
+        if("7".equals(cid)){//母婴
+            return "2";
+        }
+        if("8".equals(cid)){//美食
+            return "6";
+        }
+        if("9".equals(cid)){//箱包
+            return "11";
+        }
+        if("10".equals(cid)){//居家日用
+            return "4";
+        }
+        if("11".equals(cid)){//数码家电
+            return "8";
+        }
+        if("12".equals(cid)){//文娱车品
+            return "7";
+        }
+        if("13".equals(cid)){//家装家纺
+            return "14";
+        }
+        if("14".equals(cid)){//户外运动
+            return "13";
+        }
+        return null;
+    }
+
+    private String getCouponAmount(TbkDgMaterialOptionalResponse.MapData mapData) throws ApiException {
+        TaobaoClient client = new DefaultTaobaoClient(Contents.MATERIAL_OPTIONAL_URL, Contents.appkey, Contents.secret);
+        TbkCouponGetRequest req = new TbkCouponGetRequest();
+        req.setItemId(mapData.getNumIid());
+        req.setActivityId(mapData.getCouponId());
+        TbkCouponGetResponse rsp = client.execute(req);
+        TbkCouponGetResponse.MapData mapData1 = rsp.getData();
+        return mapData1.getCouponAmount();
+    }
+
+    private String getSmallImages(List<String> list) {
+        StringBuffer sb = new StringBuffer();
+        for(String str : list){
+            sb.append(str);
+            sb.append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
     /**

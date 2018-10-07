@@ -40,8 +40,31 @@
         </javaClientGenerator>
 
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-        <table tableName="tb_mn_cat_item" mapperName="TbMnCatItemMapper"
+       <!-- <table tableName="tb_mn_cat_item" mapperName="TbMnCatItemMapper"
                domainObjectName="TbMnCatItemDo"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="false"
+               enableCountByExample="true"
+               enableSelectByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="false">
+        </table>-->
+        <!--<table tableName="tb_mn_cat" mapperName="TbMnCatMapper"
+               domainObjectName="TbMnCatDo"
+               enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="false"
+               enableCountByExample="true"
+               enableSelectByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="false">
+        </table>-->
+
+        <table tableName="tb_mn_product_detail" mapperName="TbMnProductDetailMapper"
+               domainObjectName="TbMnProductDetailDo"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
