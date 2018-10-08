@@ -40,14 +40,15 @@ public class TaoBaoManagerImpl implements ITaoBaoManager{
     public List<TbMnMaterialOptionalDo> getProductList(TbMnMaterialOptionalDo optionalDo) {
         PageHelper.startPage(optionalDo.getPageNo(),optionalDo.getPageSize());
         TbMnMaterialOptionalDoExample example = new TbMnMaterialOptionalDoExample();
+        TbMnMaterialOptionalDoExample.Criteria criteria = example.createCriteria();
         if(null != optionalDo.getNumIid()){
-            example.createCriteria().andNumIidEqualTo(optionalDo.getNumIid());
+            criteria.andNumIidEqualTo(optionalDo.getNumIid());
         }
         if(null != optionalDo.getLevelOneCategoryId()){
-            example.createCriteria().andLevelOneCategoryIdEqualTo(optionalDo.getLevelOneCategoryId());
+            criteria.andLevelOneCategoryIdEqualTo(optionalDo.getLevelOneCategoryId());
         }
         if(null != optionalDo.getCategoryId()){
-            example.createCriteria().andCategoryIdEqualTo(optionalDo.getCategoryId());
+            criteria.andCategoryIdEqualTo(optionalDo.getCategoryId());
         }
         example.setOrderByClause("volume desc");
         List<TbMnMaterialOptionalDo> optionalDos = tbMnMaterialOptionalMapper.selectByExample(example);

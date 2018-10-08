@@ -23,7 +23,7 @@
             id="dtkTask"
             class="cn.mnquan.task.DtkTask"
             registry-center-ref="regCenter"
-            cron="0/10 * * * * ?"
+            cron="0 20 1  * * ?"
             sharding-total-count="1"/>
 
 </beans>

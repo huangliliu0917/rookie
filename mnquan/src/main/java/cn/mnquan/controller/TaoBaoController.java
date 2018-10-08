@@ -110,6 +110,7 @@ public class TaoBaoController extends BaseController{
         TbMnCatItemDo itemDo = taoBaoManager.getCategoryName(optionalDo);
        /* model.addAttribute("optionalDos",optionalDos);*/
         model.addAttribute("categoryName",itemDo.getCategoryName());
+        model.addAttribute("optionalDo",optionalDo);
         return "page/classify_product_list";
     }
 

@@ -89,21 +89,23 @@ public class DtkManagerImpl implements IDtkManager {
                     req.setQ(itemUrl);
                     req.setAdzoneId(Contents.adzone_id);
                     TbkDgMaterialOptionalResponse.MapData mapData = null;
+                    String command = null;
+                    String couponAmonunt = null;
+                    String smallImages = null;
                     try {
                         TbkDgMaterialOptionalResponse optionalResponse = client.execute(req);
                         mapData = optionalResponse.getResultList().get(0);
+                        //如果券有效期为空，则continue
+                        if(null == mapData.getCouponStartTime()) continue;
+                        //获取淘口令
+                        command = getCommand(mapData);
+                        if(null == command || "" == command) continue;
+                        //获取优惠券金额
+                        couponAmonunt = getCouponAmount(mapData);
+                        smallImages = getSmallImages(mapData.getSmallImages());
                     } catch (Exception e) {
                         continue;
                     }
-                    //如果券有效期为空，则continue
-                    if(null == mapData.getCouponStartTime()) continue;
-                    //获取淘口令
-                    String command = getCommand(mapData);
-                    if(null == command || "" == command) continue;
-                    //获取优惠券金额
-                    String couponAmonunt = getCouponAmount(mapData);
-                    String smallImages = getSmallImages(mapData.getSmallImages());
-
                     TbMnMaterialOptionalDo record = BeanMapperUtil.objConvert(mapData,TbMnMaterialOptionalDo.class);
                     System.out.println(record.toString());
                     record.setLevelOneCategoryId(Long.valueOf(productDo.getCatId()));

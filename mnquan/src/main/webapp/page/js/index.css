@@ -20,5 +20,5 @@
 .home_ant_brand div.swiper-slide .money del,.home_ant_voucher div.swiper-slide .money del{color:#bbb;font-size:1rem}
 .home_ant_brand div.swiper-slide .swiper-cent,.home_ant_voucher div.swiper-slide .swiper-cent{margin-right:5px;height:100%}
 .home_ant_brand div.swiper-slide .swiper-cent .cent,.home_ant_voucher div.swiper-slide .swiper-cent .cent{padding:10px 10px 0;border-radius:8px 8px 0 0;box-shadow:0 2px 10px 0 rgba(0,0,0,.1);position:relative;z-index:1;zoom:1}
-.home_ant_brand div.swiper-slide .swiper-cent .cent .progress,.home_ant_voucher div.swiper-slide .swiper-cent .cent .progress{position:absolute;z-index:1;zoom:1;left:0;bottom:0;overflow:hidden;height:3px;background-color:#FFD6EC;width:100%}
+.home_ant_brand div.swiper-slide .swiper-cent .cent .progress,.home_ant_voucher div.swiper-slide .swiper-cent .cent .progress{position:absolute;z-index:1;zoom:1;left:0;overflow:hidden;height:3px;background-color:#FFD6EC;width:100%}
 .home_ant_brand div.swiper-slide .swiper-cent .cent .progress i,.home_ant_voucher div.swiper-slide .swiper-cent .cent .progress i{display:block;height:3px;overflow:hidden;background-color:#FF66B7;width:5px;transition:all 1s ease 0s;-o-transition:all 1s ease 0s;-moz-transition:all 1s ease 0s;-webkit-transition:all 1s ease 0s;transform-origin:center}

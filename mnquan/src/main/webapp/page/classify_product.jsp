@@ -11,7 +11,9 @@
     <title>居家日用_淘券宝</title>
     <meta name="keywords" content="9.9包邮，白菜价，天天特价，优惠卷,淘券宝">
     <meta name="description" content="9.9包邮，白菜价，天天特价">
+    <link rel="stylesheet" href="${contextPath}/page/js/bootstrap.min.css">
     <script src="${contextPath}/page/js/jquery.min.js" type="text/javascript"></script>
+    <script src="${contextPath}/page/js/bootstrap.min.js"></script>
     <script src="${contextPath}/page/js/swiper-4.4.1.min.js" type="text/javascript"></script>
     <link href="${contextPath}/page/js/wap_common.css" rel="stylesheet">
     <link href="${contextPath}/page/js/wapcat.css" rel="stylesheet"/>
@@ -23,6 +25,12 @@
         <span>${catName}</span>
     </div>
     <a class="mui-action-menu main-more" href="javascript:void(0)" id="cat-action-menu"></a>
+</div>
+<div class="progress" style="position: fixed;z-index: 9999;top: 43px;">
+    <div id="my_progress" class="progress-bar progress-bar-success" role="progressbar"
+         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+         style="width: 0%;position: fixed;z-index: 9999;height: 3px;">
+    </div>
 </div>
 <nav id="detail-top-menu">
     <div class="arrow"></div>
@@ -43,20 +51,20 @@
     <div class="swiper-container  swiper-container-horizontal swiper-container-android">
         <div class="swiper-wrapper">
             <input id="inputCatId" type="hidden" value="${catId}">
-            <div id="catID_1" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=1" data-cid="1">女装</a></div>
-            <div id="catID_2" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=2" data-cid="6">男装</a></div>
-            <div id="catID_3" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=3" data-cid="3">鞋品</a></div>
-            <div id="catID_4" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=4" data-cid="4">内衣</a></div>
-            <div id="catID_5" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=5" data-cid="9">配饰</a></div>
-            <div id="catID_6" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=6" data-cid="5">美妆</a></div>
-            <div id="catID_7" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=7" data-cid="8">母婴</a></div>
-            <div id="catID_8" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=8" data-cid="2">美食</a></div>
-            <div id="catID_9" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=9" data-cid="11">箱包</a></div>
-            <div id="catID_10" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=10" data-cid="10">居家日用</a></div>
-            <div id="catID_11" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=11" data-cid="7">数码家电</a></div>
-            <div id="catID_12" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=12" data-cid="12">文娱车品</a></div>
-            <div id="catID_13" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=13" data-cid="14">家装家纺</a></div>
-            <div id="catID_14" class="swiper-slide"><a href="/app/classify/skipProduct.do?catId=14" data-cid="13">户外运动</a></div>
+            <div id="catID_1" class="swiper-slide"><a onclick="myProgress(1,1);" href="javascript:void(0);" data-cid="1">女装</a></div>
+            <div id="catID_2" class="swiper-slide"><a onclick="myProgress(2,1);" href="javascript:void(0);" data-cid="6">男装</a></div>
+            <div id="catID_3" class="swiper-slide"><a onclick="myProgress(3,1);" href="javascript:void(0);" data-cid="3">鞋品</a></div>
+            <div id="catID_4" class="swiper-slide"><a onclick="myProgress(4,1);" href="javascript:void(0);" data-cid="4">内衣</a></div>
+            <div id="catID_5" class="swiper-slide"><a onclick="myProgress(5,1);" href="javascript:void(0);" data-cid="9">配饰</a></div>
+            <div id="catID_6" class="swiper-slide"><a onclick="myProgress(6,1);" href="javascript:void(0);" data-cid="5">美妆</a></div>
+            <div id="catID_7" class="swiper-slide"><a onclick="myProgress(7,1);" href="javascript:void(0);" data-cid="8">母婴</a></div>
+            <div id="catID_8" class="swiper-slide"><a onclick="myProgress(8,1);" href="javascript:void(0);" data-cid="2">美食</a></div>
+            <div id="catID_9" class="swiper-slide"><a onclick="myProgress(9,1);" href="javascript:void(0);" data-cid="11">箱包</a></div>
+            <div id="catID_10" class="swiper-slide"><a onclick="myProgress(10,1);" href="javascript:void(0);" data-cid="10">居家日用</a></div>
+            <div id="catID_11" class="swiper-slide"><a onclick="myProgress(11,1);" href="javascript:void(0);" data-cid="7">数码家电</a></div>
+            <div id="catID_12" class="swiper-slide"><a onclick="myProgress(12,1);" href="javascript:void(0);" data-cid="12">文娱车品</a></div>
+            <div id="catID_13" class="swiper-slide"><a onclick="myProgress(13,1);" href="javascript:void(0);" data-cid="14">家装家纺</a></div>
+            <div id="catID_14" class="swiper-slide"><a onclick="myProgress(14,1);" href="javascript:void(0);" data-cid="13">户外运动</a></div>
         </div>
         <a href="javascript:;" class="tab_def_list"></a>
         <div class="load"></div>
@@ -68,7 +76,7 @@
     <ul>
         <c:forEach items="${catItemDos}" var="item" varStatus="tbkCoupon">
             <li style="" class="cat-item ">
-                <a href="${item.skipUrl}">
+                <a onclick="myProgress('${item.skipUrl}','2')" href="javascript:void(0);">
                     <img class="lazy" src="${item.categoryPictureUrl}" style="background: rgb(245, 245, 245); display: block;"><span>${item.categoryName}</span>
                 </a>
             </li>
@@ -126,13 +134,21 @@
         </div>
     </div>
     <div class="pullup-goods">
-        <div class="label">点击加载更多</div>
+        <a id="label" style="text-decoration: none;">点击加载更多</a>
         <%--<div class="label">商品加载中...</div>--%>
     </div>
 </div>
-<div class="toTop" style="bottom: 0px; display: none;"></div>
-<div style="display: none;">
 </div>
+<style>
+    #return-top{position:fixed;bottom:10%;right:50px; width:60px;height:60px;text-align:center;display:none;z-index: 10;}
+    #return-top a{text-decoration:none;}
+</style>
+<div id="return-top">
+    <a>
+        <img src="${contextPath}/page/img/top.png">
+    </a>
+</div>
+</body>
 <script>
     var pageNo = 1;
     var domain = "http://"+window.location.host;
@@ -162,7 +178,7 @@
                     if(arrLen > 0){
                         var classifyProductHtml = '';
                         $.each(data,function(index,item){
-                            classifyProductHtml+='<div class="goods-item"><a data-gid="16537009" href="'+domain+'/app/detail/skipProductDetail.do?numIid='+item.numIid+'" class="img">' +
+                            classifyProductHtml+='<div class="goods-item"><a data-gid="16537009" onclick="myProgress('+item.numIid+','+'3'+')" href="javascript:void(0);" class="img">' +
                                 '<span class="coupon-wrapper  theme-bg-color-1">券 <i>￥</i><b>'+item.couponAmount+'</b></span>' +
                                 '<span class="today-wrapper"><b>NEW</b></span>' +
                                 '<img class="lazy" src='+item.pictUrl+' style="background: rgb(245, 245, 245); display: inline;"></a>' +
@@ -172,7 +188,7 @@
                                 '<span class="text">券后</span><div class="sold-wrapper"><span class="text">销量</span>' +
                                 '<span class="sold-num">'+item.volume+'</span></div></div></div>';
                         });
-                        $("#classify_product_div").after(classifyProductHtml);
+                        $("#classify_product_div").before(classifyProductHtml);
                         pageNo++;
                     }
                 }
@@ -188,14 +204,6 @@
             n = (r1 >= r2) ? r1 : r2;
             return ((arg1 * m - arg2 * m) / m).toFixed(n);
         }
-        //加法避免丢失精度
-        function accAdd(arg1, arg2) {
-            var r1, r2, m;
-            try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
-            try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
-            m = Math.pow(10, Math.max(r1, r2))
-            return (arg1 * m + arg2 * m) / m
-        }
 
         $("#cat-action-menu").click(function () {
             var tabByStyle = $("#detail-top-menu").attr("class");
@@ -207,13 +215,44 @@
         });
 
         $('.pullup-goods').click(function(){
-            $('.label').empty();
-            $('.label').append('商品加载中...');
+            $("#label").text("商品加载中...");
             get_list();
-            $('.label').empty();
-            $('.label').append('点击加载更多')
+            $('#label').text('点击加载更多')
         })
     })
+
+    //返回顶部按钮控制
+    $('#return-top').hide();
+    $(function(){
+        $(window).scroll(function(){
+            if($(window).scrollTop()>300){
+                $('#return-top').fadeIn(300);
+            }
+            else{$('#return-top').fadeOut(200);}
+        });
+        $('#return-top').click(function(){
+            $('body,html').animate({scrollTop:0},300);
+            return false;
+        })
+    });
+    function myProgress(item,oper_type) {
+        if(oper_type == 1){
+            window.location.href = domain+"/app/classify/skipProduct.do?catId="+item;
+        }
+        if(oper_type == 2){
+            window.location.href = domain+item;
+        }
+        if(oper_type == 3){
+            window.location.href = domain+"/app/detail/skipProductDetail.do?numIid="+item;
+        }
+        var progress = 80;
+        var progressId = setInterval(function(){
+            progress= progress+5;
+            $("#my_progress").css({width:progress+"%"});
+            if(progress > 95){
+                clearInterval(progressId);
+            }
+        },50);
+    }
 </script>
-</body>
 </html>

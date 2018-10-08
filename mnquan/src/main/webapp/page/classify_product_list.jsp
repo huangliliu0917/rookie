@@ -11,7 +11,9 @@
     <title>居家日用_淘券宝</title>
     <meta name="keywords" content="9.9包邮，白菜价，天天特价，优惠卷,淘券宝">
     <meta name="description" content="9.9包邮，白菜价，天天特价">
+    <link rel="stylesheet" href="${contextPath}/page/js/bootstrap.min.css">
     <script src="${contextPath}/page/js/jquery.min.js" type="text/javascript"></script>
+    <script src="${contextPath}/page/js/bootstrap.min.js"></script>
     <link href="${contextPath}/page/js/wap_common.css" rel="stylesheet">
     <link href="${contextPath}/page/js/wapcat.css" rel="stylesheet"/>
 </head>
@@ -20,8 +22,16 @@
     <a href="javascript:void(0)"  onclick="window.location.href=document.referrer;" class="main-back"></a>
     <div class="menu-detail">
         <span>${categoryName}</span>
+        <input id="catId" value="${optionalDo.levelOneCategoryId}"  type="hidden"/>
+        <input id="categoryId" value="${optionalDo.categoryId}" type="hidden"/>
     </div>
     <a class="mui-action-menu main-more" href="javascript:void(0)" id="cat-action-menu"></a>
+</div>
+<div class="progress" style="position: fixed;z-index: 9999;top: 43px;">
+    <div id="my_progress" class="progress-bar progress-bar-success" role="progressbar"
+         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+         style="width: 0%;position: fixed;z-index: 9999;height: 3px;">
+    </div>
 </div>
 <nav id="detail-top-menu">
     <div class="arrow"></div>
@@ -52,7 +62,6 @@
         <li class="">
             <span>
                 <a data-sort="price" href="/index.php?r=index/cat&amp;px=price&amp;cid=6&amp;u=489217">价格
-
                 <!--                    ico-up 升序   ico-down降序-->
                 </a>
                 <img src="http://localhost:8080/page/img/sx.png" class="price-ico"></img>
@@ -90,22 +99,28 @@
         </div>
     </div>
     <div class="pullup-goods">
-        <div class="label">点击加载更多</div>
+        <a id="label" style="text-decoration: none;">点击加载更多</a>
         <%--<div class="label">商品加载中...</div>--%>
     </div>
 </div>
-<div class="toTop" style="bottom: 0px; display: none;"></div>
-<div style="display: none;">
-</div>
+<style>
+    #return-top{position:fixed;bottom:10%;right:50px; width:60px;height:60px;text-align:center;display:none;z-index: 10;}
+    #return-top a{text-decoration:none;}
+</style>
 <div id="return-top">
     <a>
-        <img src="http://localhost:8080/page/img/top.png">
+        <img src="${contextPath}/page/img/top.png">
     </a>
 </div>
+</body>
 <script src="http://localhost:8080/page/js/swiper-4.4.1.min.js" type="text/javascript"></script>
 <script>
     var pageNo = 1;
     var domain = "http://"+window.location.host;
+
+    //获取一级类目 二级类目
+    var catId = $("#catId").attr("value");
+    var categoryId = $("#categoryId").attr("value");
 
     $(function(){
         //获取商品列表
@@ -115,7 +130,7 @@
             $.ajax({
                 url:""+"/app/index/getProductList.do",
                 async:false,
-                data: {'pageNo':pageNo},
+                data: {'pageNo':pageNo,'levelOneCategoryId':catId,'categoryId':categoryId},
                 dataType:'json',
                 type:"post",
                 success:function(data){
@@ -124,17 +139,17 @@
                     if(arrLen > 0){
                         var classifyProductHtml = '';
                         $.each(data,function(index,item){
-                            classifyProductHtml+='<div class="goods-item"><a data-gid="16537009" href="'+domain+'/app/detail/skipProductDetail.do?numIid='+item.numIid+'" class="img">' +
+                            classifyProductHtml+='<div class="goods-item"><a data-gid="16537009" onclick="myProgress('+item.numIid+')" href="javascript:void(0);" class="img">' +
                                 '<span class="coupon-wrapper  theme-bg-color-1">券 <i>￥</i><b>'+item.couponAmount+'</b></span>' +
                                 '<span class="today-wrapper"><b>NEW</b></span>' +
                                 '<img class="lazy" src='+item.pictUrl+' style="background: rgb(245, 245, 245); display: inline;"></a>' +
-                                '<a data-gid="16537009" href="/index.php?r=p/d&amp;id=16537009&amp;u=489217" class="title">' +
+                                '<a data-gid="16537009" href="javascript:void(0);" class="title">' +
                                 '<div class="text">【千选】'+item.shortTitle+'</div></a>' +
                                 '<div class="price-wrapper"><span class="price">￥<span>'+accSub(item.zkFinalPrice,item.couponAmount)+'</span></span>' +
                                 '<span class="text">券后</span><div class="sold-wrapper"><span class="text">销量</span>' +
                                 '<span class="sold-num">'+item.volume+'</span></div></div></div>';
                         });
-                        $("#classify_product_div").after(classifyProductHtml);
+                        $("#classify_product_div").before(classifyProductHtml);
                         pageNo++;
                     }
                 }
@@ -176,6 +191,12 @@
             }
         });
 
+        $('.pullup-goods').click(function(){
+            $("#label").text("商品加载中...");
+            get_list();
+            $('#label').text('点击加载更多')
+        })
+
         //返回顶部按钮控制
         $('#return-top').hide();
         $(function(){
@@ -191,6 +212,17 @@
             })
         })
     })
+
+    function myProgress(numIid) {
+        window.location.href = domain+"/app/detail/skipProductDetail.do?numIid="+numIid;
+        var progress = 80;
+        var progressId = setInterval(function(){
+            progress= progress+5;
+            $("#my_progress").css({width:progress+"%"});
+            if(progress > 95){
+                clearInterval(progressId);
+            }
+        },50);
+    }
 </script>
-</body>
 </html>
